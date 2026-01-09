@@ -18,7 +18,7 @@ public class RegisterService {
     }
 
     @Transactional
-    public void registerUser(UserRegisterDTO userRegisterDTO) {
+    public UserDTO registerUser(UserRegisterDTO userRegisterDTO) {
         UserDTO userDTO = new UserDTO(userRegisterDTO.getCpf(), userRegisterDTO.getName());
         userDTO.setRole(userRegisterDTO.getRole());
 
@@ -27,5 +27,7 @@ public class RegisterService {
 
         Credentials credentials = credentialsService.getCredentialsEntity(user, userRegisterDTO.getPassword());
         credentialsService.register(credentials);
+
+        return userDTO;
     }
 }

@@ -1,7 +1,7 @@
 package com.rafatavares03.AGMED.controller;
 
+import com.rafatavares03.AGMED.model.dto.UserDTO;
 import com.rafatavares03.AGMED.model.dto.UserRegisterDTO;
-import com.rafatavares03.AGMED.model.entity.User;
 import com.rafatavares03.AGMED.service.RegisterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +20,11 @@ public class RegisterController {
     }
 
     @PostMapping("/secretary")
-    public ResponseEntity<User> registerSecretary(@RequestBody UserRegisterDTO user) {
+    public ResponseEntity<UserDTO> registerSecretary(@RequestBody UserRegisterDTO user) {
         user.setRole("secretary");
-        service.registerUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        UserDTO dto = service.registerUser(user);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(dto);
     }
 }
