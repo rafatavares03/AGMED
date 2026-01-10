@@ -3,36 +3,32 @@ package com.rafatavares03.AGMED.service;
 import com.rafatavares03.AGMED.model.dto.DoctorDTO;
 import com.rafatavares03.AGMED.model.entity.Credentials;
 import com.rafatavares03.AGMED.model.entity.Doctor;
+import com.rafatavares03.AGMED.model.entity.User;
 import com.rafatavares03.AGMED.repository.CredentialsRepository;
 import com.rafatavares03.AGMED.repository.DoctorRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-/*
 @Service
 public class DoctorService {
-    private final DoctorRepository doctorRepository;
-    private final CredentialsRepository credentialsRepository;
+    private final DoctorRepository repository;
 
-    public DoctorService(DoctorRepository doctorRepository, CredentialsRepository credentialsRepository) {
-        this.doctorRepository = doctorRepository;
-        this.credentialsRepository = credentialsRepository;
+    public DoctorService(DoctorRepository repository) {
+        this.repository = repository;
     }
 
-    @Transactional
-    public void register(DoctorDTO dto, char[] password) {
+    public Doctor register(Doctor doctor) {
+        return repository.save(doctor);
+    }
+
+    public Doctor getDoctorEntity(DoctorDTO dto) {
         Doctor doctor = new Doctor();
-        doctor.setName(dto.getName());
         doctor.setCpf(dto.getCpf());
+        doctor.setName(dto.getName());
+        doctor.setRole(dto.getRole());
         doctor.setCrm(dto.getCrm());
         doctor.setSpeciality(dto.getSpeciality());
 
-        Credentials credentials = new Credentials();
-        credentials.setCpf(dto.getCpf());
-        credentials.setPassword(password);
-
-        doctorRepository.save(doctor);
-        credentialsRepository.save(credentials);
+        return doctor;
     }
 }
-*/

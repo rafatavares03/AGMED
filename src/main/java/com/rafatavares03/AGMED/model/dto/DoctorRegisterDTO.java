@@ -1,24 +1,19 @@
 package com.rafatavares03.AGMED.model.dto;
 
-import com.rafatavares03.AGMED.model.entity.Doctor;
+public class DoctorRegisterDTO {
+    private String cpf;
+    private String name;
+    private String role;
+    private char[] password;
+    private String crm;
+    private String speciality;
 
-public class DoctorDTO {
-    String cpf;
-    String name;
-    String crm;
-    String role;
-    String speciality;
+    public DoctorRegisterDTO(){}
 
-    public DoctorDTO() {}
-
-    public DoctorDTO(String cpf, String name, String crm, String speciality) {
+    public DoctorRegisterDTO(String cpf, String name, char[] password, String crm, String speciality) {
         this.cpf = cpf;
         this.name = name;
-        this.crm = crm;
-        this.speciality = speciality;
-    }
-
-    public DoctorDTO(String crm, String speciality) {
+        this.password = password;
         this.crm = crm;
         this.speciality = speciality;
     }
@@ -39,14 +34,6 @@ public class DoctorDTO {
         this.name = name;
     }
 
-    public String getCrm() {
-        return this.crm;
-    }
-
-    public void setCrm(String crm) {
-        this.crm = crm;
-    }
-
     public String getRole() {
         return this.role;
     }
@@ -55,8 +42,20 @@ public class DoctorDTO {
         this.role = role;
     }
 
+    public char[] getPassword() {
+        return password;
+    }
+
+    public String getCrm() {
+        return crm;
+    }
+
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
+
     public String getSpeciality() {
-        return this.speciality;
+        return speciality;
     }
 
     public void setSpeciality(String speciality) {
