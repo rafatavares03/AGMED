@@ -14,6 +14,10 @@ public class UserService {
         this.repository = repository;
     }
 
+    public boolean userExists(String cpf) {
+        return repository.existsById(cpf);
+    }
+
     public User register(User user) {
         return repository.save(user);
     }

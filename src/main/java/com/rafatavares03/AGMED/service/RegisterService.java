@@ -1,5 +1,6 @@
 package com.rafatavares03.AGMED.service;
 
+import com.rafatavares03.AGMED.exception.UserAlreadyExistException;
 import com.rafatavares03.AGMED.model.dto.DoctorDTO;
 import com.rafatavares03.AGMED.model.dto.DoctorRegisterDTO;
 import com.rafatavares03.AGMED.model.dto.UserDTO;
@@ -24,6 +25,10 @@ public class RegisterService {
 
     @Transactional
     public UserDTO registerUser(UserRegisterDTO userRegisterDTO) {
+        if(userService.userExists(userRegisterDTO.getCpf())) {
+            throw new UserAlreadyExistException();
+        }
+
         UserDTO userDTO = new UserDTO(userRegisterDTO.getCpf(), userRegisterDTO.getName());
         userDTO.setRole(userRegisterDTO.getRole());
 
@@ -38,6 +43,10 @@ public class RegisterService {
 
     @Transactional
     public DoctorDTO registerDoctor(DoctorRegisterDTO doctorRegisterDTO) {
+        if(doctorService.doctorExists(doctorRegisterDTO.getCpf())) {
+            throw new UserAlreadyExistException("The doctor you are trying to register is already registered.");
+        }
+
         DoctorDTO doctorDTO = new DoctorDTO(doctorRegisterDTO.getCpf(), doctorRegisterDTO.getName(), doctorRegisterDTO.getCrm(), doctorRegisterDTO.getSpeciality());
         doctorDTO.setRole(doctorRegisterDTO.getRole());
         Doctor doctor = doctorService.getDoctorEntity(doctorDTO);

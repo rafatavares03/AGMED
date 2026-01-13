@@ -17,6 +17,10 @@ public class DoctorService {
         this.repository = repository;
     }
 
+    public boolean doctorExists(String cpf) {
+        return repository.existsById(cpf);
+    }
+
     public Doctor register(Doctor doctor) {
         return repository.save(doctor);
     }
