@@ -1,12 +1,10 @@
 package com.rafatavares03.AGMED.service;
 
 import com.rafatavares03.AGMED.exception.UserAlreadyExistException;
-import com.rafatavares03.AGMED.model.dto.DoctorDTO;
-import com.rafatavares03.AGMED.model.dto.DoctorRegisterDTO;
-import com.rafatavares03.AGMED.model.dto.UserDTO;
-import com.rafatavares03.AGMED.model.dto.UserRegisterDTO;
+import com.rafatavares03.AGMED.model.dto.*;
 import com.rafatavares03.AGMED.model.entity.Credentials;
 import com.rafatavares03.AGMED.model.entity.Doctor;
+import com.rafatavares03.AGMED.model.entity.Patient;
 import com.rafatavares03.AGMED.model.entity.User;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -16,11 +14,13 @@ public class RegisterService {
     UserService userService;
     DoctorService doctorService;
     CredentialsService credentialsService;
+    PatientService patientService;
 
-    public RegisterService(UserService userService, DoctorService doctorService, CredentialsService credentialsService) {
+    public RegisterService(UserService userService, DoctorService doctorService, CredentialsService credentialsService, PatientService patientService) {
         this.userService = userService;
         this.doctorService = doctorService;
         this.credentialsService = credentialsService;
+        this.patientService = patientService;
     }
 
     @Transactional
@@ -56,5 +56,16 @@ public class RegisterService {
         credentialsService.register(credentials);
 
         return doctorDTO;
+    }
+
+    public PatientDTO registerPatient(PatientDTO patientDTO) {
+        if(patientService.patientExists(patientDTO.getCpf())) {
+            throw new UserAlreadyExistException("This patient is already registered.");
+        }
+
+        Patient patient = patientService.getPatientEntity(patientDTO);
+        patientService.register(patient);
+
+        return patientDTO;
     }
 }

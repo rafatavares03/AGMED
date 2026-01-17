@@ -1,9 +1,6 @@
 package com.rafatavares03.AGMED.controller;
 
-import com.rafatavares03.AGMED.model.dto.DoctorDTO;
-import com.rafatavares03.AGMED.model.dto.DoctorRegisterDTO;
-import com.rafatavares03.AGMED.model.dto.UserDTO;
-import com.rafatavares03.AGMED.model.dto.UserRegisterDTO;
+import com.rafatavares03.AGMED.model.dto.*;
 import com.rafatavares03.AGMED.service.RegisterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +31,14 @@ public class RegisterController {
     public ResponseEntity<DoctorDTO> registerDoctor(@RequestBody DoctorRegisterDTO doctor) {
         doctor.setRole("doctor");
         DoctorDTO dto = service.registerDoctor(doctor);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(dto);
+    }
+
+    @PostMapping("/patient")
+    public ResponseEntity<PatientDTO> registerPatient(@RequestBody PatientDTO patient) {
+        PatientDTO dto = service.registerPatient(patient);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(dto);
