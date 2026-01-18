@@ -1,9 +1,12 @@
 package com.rafatavares03.AGMED.service;
 
+import com.rafatavares03.AGMED.model.dto.CredentialsDTO;
 import com.rafatavares03.AGMED.model.entity.Credentials;
 import com.rafatavares03.AGMED.model.entity.User;
 import com.rafatavares03.AGMED.repository.CredentialsRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 @Service
 public class CredentialsService {
@@ -23,5 +26,10 @@ public class CredentialsService {
 
     public Credentials register(Credentials credentials) {
         return repository.save(credentials);
+    }
+
+    public boolean validate(CredentialsDTO dto) {
+        Credentials credentials = repository.getReferenceById(dto.getCpf());
+        return Arrays.equals(credentials.getPassword(), dto.getPassword());
     }
 }

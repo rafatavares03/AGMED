@@ -1,10 +1,10 @@
 package com.rafatavares03.AGMED.model.dto;
 
 public class PatientDTO {
-    String cpf;
-    String name;
-    String address;
-    String phoneNumber;
+    private String cpf;
+    private String name;
+    private String address;
+    private String phoneNumber;
 
     public PatientDTO(){}
 

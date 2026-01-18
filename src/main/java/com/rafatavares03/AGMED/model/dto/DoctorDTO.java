@@ -3,11 +3,11 @@ package com.rafatavares03.AGMED.model.dto;
 import com.rafatavares03.AGMED.model.entity.Doctor;
 
 public class DoctorDTO {
-    String cpf;
-    String name;
-    String crm;
-    String role;
-    String speciality;
+    private String cpf;
+    private String name;
+    private String crm;
+    private String role;
+    private String speciality;
 
     public DoctorDTO() {}
 
